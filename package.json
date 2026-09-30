@@ -1,0 +1,22 @@
+{
+  "name": "shop-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:nocsp": "CSP=off vite",
+    "build": "vite build && node scripts/make-routes.mjs",
+    "build:nocsp": "CSP=off vite build && node scripts/make-routes.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^7.3.1"
+  }
+}
