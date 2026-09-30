@@ -1,7 +1,11 @@
 # Trendora: E-commerce Cookie Banner Test Site
 
 A fictional Myntra-style fashion store (React + Vite) for testing the Privy cookie consent banner on a realistic
-multi-page shopping site. Nothing on it is real: no payments, no accounts, no external images.
+multi-page shopping site. Nothing on it is real: no payments, no accounts.
+
+Product photos are free [Unsplash](https://unsplash.com/license) images, hotlinked from `images.unsplash.com`
+(mapped per product in [`src/data/photos.js`](src/data/photos.js)). If a photo fails to load, the card falls back
+to a built-in SVG drawing. To change a photo, replace its `photo-…` id in that file.
 
 Live: https://swarupasawant.github.io/shop-demo/
 

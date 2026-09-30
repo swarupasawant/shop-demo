@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CATEGORIES, PRODUCTS } from '../data/products.js'
-import ProductArt from '../components/ProductArt.jsx'
+import { PHOTOS, photoUrl } from '../data/photos.js'
 import ProductCard from '../components/ProductCard.jsx'
 
 const SLIDES = [
-    { title: 'END OF SEASON SALE', sub: 'Min. 50% off on 2,000+ brands', cta: '/shop', bg: 'linear-gradient(120deg,#ff3f6c,#ff905a)', art: ['dress', '#fff'] },
-    { title: 'THE DENIM EDIT', sub: 'Fresh fits starting ₹999', cta: '/men', bg: 'linear-gradient(120deg,#1f3a5f,#4a7bb7)', art: ['jeans', '#dfe9f5'] },
-    { title: 'GLOW UP', sub: 'Beauty bestsellers up to 40% off', cta: '/beauty', bg: 'linear-gradient(120deg,#6c5ce7,#e17da5)', art: ['perfume', '#fff'] }
+    { title: 'END OF SEASON SALE', sub: 'Min. 50% off on 2,000+ brands', cta: '/shop', bg: 'linear-gradient(120deg,#ff3f6c,#ff905a)', photo: PHOTOS._hero_sale[0] },
+    { title: 'THE DENIM EDIT', sub: 'Fresh fits starting ₹999', cta: '/men', bg: 'linear-gradient(120deg,#1f3a5f,#4a7bb7)', photo: PHOTOS._hero_denim[0] },
+    { title: 'GLOW UP', sub: 'Beauty bestsellers up to 40% off', cta: '/beauty', bg: 'linear-gradient(120deg,#6c5ce7,#e17da5)', photo: PHOTOS._hero_beauty[0] }
 ]
 
 const OFFERS = [
@@ -37,7 +37,7 @@ export default function Home() {
                     <Link to={s.cta} className="btn-hero">SHOP NOW</Link>
                 </div>
                 <div className="hero-art">
-                    <ProductArt type={s.art[0]} color={s.art[1]} bg="transparent" />
+                    <img key={s.photo} src={photoUrl(s.photo, 640, 720)} alt="" />
                 </div>
                 <div className="hero-dots">
                     {SLIDES.map((_, i) => (
@@ -61,7 +61,7 @@ export default function Home() {
                     const sample = PRODUCTS.find((p) => p.category === c.slug)
                     return (
                         <Link key={c.slug} to={`/${c.slug}`} className="cat-tile" style={{ background: c.color }}>
-                            <ProductArt type={sample.type} color={sample.color} bg="transparent" />
+                            <img src={photoUrl(sample.photo, 400, 440)} alt={c.name} loading="lazy" />
                             <strong>{c.name}</strong>
                             <span>{c.tagline}</span>
                             <em>Shop now →</em>

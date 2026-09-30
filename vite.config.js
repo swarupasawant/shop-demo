@@ -50,7 +50,7 @@ function policy(nonce, origins, dev) {
         `style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com ${origins}`,
         `font-src 'self' https://fonts.gstatic.com data: ${origins}`,
         `connect-src 'self' ${origins}${extra}`,
-        `img-src 'self' data: ${origins}`,
+        `img-src 'self' data: https://images.unsplash.com ${origins}`,
         `frame-src 'self' ${origins}${dev ? ' ' + LOCAL_BACKEND : ''}`,
         "object-src 'none'",
         "base-uri 'none'"

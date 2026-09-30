@@ -27,7 +27,8 @@ export default function Footer() {
                     <h4>ABOUT THIS SITE</h4>
                     <p>
                         A fictional storefront for testing cookie consent banners. No products, payments or
-                        accounts are real.
+                        accounts are real. Product photos from{' '}
+                        <a className="inline" href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a>.
                     </p>
                 </div>
             </div>

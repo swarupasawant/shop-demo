@@ -1,5 +1,6 @@
-// All data is fake. Product visuals are drawn as inline SVG (ProductArt), so
-// the page needs no third-party image host and stays inside the strict CSP.
+// All data is fake. Photos come from Unsplash (see photos.js); if one fails to
+// load, the card falls back to an inline SVG drawing (ProductArt).
+import { PHOTOS } from './photos.js'
 
 export const CATEGORIES = [
     { slug: 'men', name: 'Men', tagline: 'Shirts, tees, denim & sneakers', color: '#e0f0ff' },
@@ -85,6 +86,8 @@ export const PRODUCTS = Object.entries(CATALOG).flatMap(([category, items]) =>
             rating: (3.6 + seeded(id + 7) * 1.3).toFixed(1),
             ratingCount: Math.floor(seeded(id + 3) * 9000) + 40,
             color: PALETTE[(i + category.length) % PALETTE.length],
+            photo: PHOTOS[name]?.[0],
+            photoBy: PHOTOS[name]?.[1],
             isNew: seeded(id + 11) > 0.75
         }
     })
