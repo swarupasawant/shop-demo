@@ -12,7 +12,14 @@
 import { mkdirSync, copyFileSync, existsSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
-const ROUTES = ['shop', 'men', 'women', 'kids', 'beauty', 'home-living']
+const ROUTES = [
+    'shop', 'men', 'women', 'kids', 'beauty', 'home-living',
+    // Banner language auto-selection (URL-path detection) — privyauto cookie-manager tests.
+    // Real 200 pages so the banner loads on a clean response for each language path,
+    // including the ISO-collision edge cases (brx, sat) and the must-NOT-match ones (br, st).
+    'hindi', 'hi', 'gujarati', 'gu', 'marathi', 'mr', 'tamil', 'ta',
+    'brx', 'sat', 'br', 'st'
+]
 
 const dist = resolve('dist')
 const index = join(dist, 'index.html')

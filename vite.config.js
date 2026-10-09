@@ -12,7 +12,7 @@ import react from '@vitejs/plugin-react'
 // Without editing this file: `npm run dev:nocsp` / `npm run build:nocsp`
 // (or CSP=off in the environment) turns it off for that run.
 // ---------------------------------------------------------------------------
-const ENABLE_CSP = true
+const ENABLE_CSP = false  // privyauto: our cookie-manager tests publish an UN-nonced banner, so no CSP
 
 // Fixed on purpose: the tag copied from the dashboard may carry this literal
 // value, and GitHub Pages cannot mint a nonce per response anyway. A real
