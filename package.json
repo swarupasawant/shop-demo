@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:nocsp": "CSP=off vite",
-    "build": "vite build && node scripts/make-routes.mjs",
-    "build:nocsp": "CSP=off vite build && node scripts/make-routes.mjs",
+    "build": "vite build --base=${BASE_PATH:-/shop-demo/} && node scripts/make-routes.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

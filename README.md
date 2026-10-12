@@ -24,12 +24,11 @@ automatically. If the console shows a CSP violation for some other Privy origin,
 ```bash
 npm install
 npm run dev          # strict CSP on  -> http://localhost:5173
-npm run dev:nocsp    # no CSP at all
 ```
 
 ## CSP nonce testing
 
-Controlled by `ENABLE_CSP` at the top of [`vite.config.js`](vite.config.js), or per run with `CSP=off`.
+Controlled by which `export default` at the bottom of [`vite.config.js`](vite.config.js) is uncommented (strict CSP, or none). The Privy test automation switches it for you.
 
 | Setting | What the page gets |
 | --- | --- |

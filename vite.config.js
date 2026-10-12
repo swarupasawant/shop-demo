@@ -4,15 +4,9 @@ import react from '@vitejs/plugin-react'
 // ---------------------------------------------------------------------------
 // CSP nonce toggle
 //
-// ENABLE_CSP = true   serve a strict Content-Security-Policy (nonce +
-//                     'strict-dynamic', no unsafe-inline), like a real client
-//                     running a nonce policy.
-// ENABLE_CSP = false  no policy at all. The banner must behave the same.
-//
-// Without editing this file: `npm run dev:nocsp` / `npm run build:nocsp`
-// (or CSP=off in the environment) turns it off for that run.
+// Which mode is active is decided by which `export default` at the bottom of this file is
+// uncommented.
 // ---------------------------------------------------------------------------
-const ENABLE_CSP = false  // privyauto: our cookie-manager tests publish an UN-nonced banner, so no CSP
 
 // Fixed on purpose: the tag copied from the dashboard may carry this literal
 // value, and GitHub Pages cannot mint a nonce per response anyway. A real
@@ -30,7 +24,6 @@ const EXTRA_BANNER_ORIGINS = [
 // Local Privy backend, dev only.
 const LOCAL_BACKEND = 'http://127.0.0.1:3001'
 
-const cspEnabled = ENABLE_CSP && process.env.CSP !== 'off'
 
 function bannerOrigins(html) {
     const origins = new Set(EXTRA_BANNER_ORIGINS)
@@ -98,11 +91,22 @@ function strictCsp() {
     }
 }
 
-// With CSP off the placeholder is left as is. Harmless: a nonce attribute is
-// only consulted when a policy names one.
-export default defineConfig(({ command }) => ({
-    plugins: cspEnabled ? [react(), strictCsp()] : [react()],
-    // GitHub Pages serves the site under /<repo>/. Set BASE_PATH=/ for a
-    // custom domain.
-    base: command === 'build' ? (process.env.BASE_PATH || '/shop-demo/') : '/'
-}))
+// ---------------------------------------------------------------------------
+// CSP MODE — only ONE of the two exports below may be active at a time.
+//
+// privyauto's demo helper (applyDemoCspMode, src/core/utils/publish-script.ts) switches the
+// mode by commenting one of them out, and matches these lines EXACTLY — keep them as written.
+// The base path is NOT set here: it comes from `vite build --base` (see package.json), so a
+// project site (/shop-demo/) and a root site both build from this same file.
+// ---------------------------------------------------------------------------
+
+// STRICT CSP (nonce + 'strict-dynamic'). html.cspNonce makes Vite nonce the <style> tags it
+// injects for imported CSS.
+export default defineConfig({ plugins: [react(), strictCsp()], html: { cspNonce: NONCE }, base: '/' })
+
+// NO CSP — the banner must behave the same (FR-6). The __PRIVY_NONCE__ placeholder is left as
+// is; a nonce attribute is only consulted when a policy names one.
+// export default defineConfig({
+//   plugins: [react()],
+//   base: '/'
+// })
